@@ -39,14 +39,18 @@
                 <button onclick="toggleDetails('details1')">Show Details</button>
                 <div class="details" id="details1">
                     <p>More information about Project One</p>
+                    <p>Upload Date: <span id="upload-date"></span></p>
+                    <p>Time Since Last Update: <span id="time-since-update"></span></p>
                 </div>
 
                 <div class="project">
                     <h3 class="project-title">Project Two</h3>
-                    <p class="project-description">A brief description of the second project.</p>
+                    <p class="project-description-two">A brief description of the second project.</p>
                     <button onclick="toggleDetails('details2')">Show Details</button>
                     <div class="details" id="details2">
                         <p>More information about Project Two.</p>
+                        <p>Upload Date: <span id="upload-date"></span></p>
+                        <p>Time Since Last Update: <span id="time-since-update"></span></p>
                     </div>
 
         </div>
@@ -81,12 +85,14 @@
 
     </section>
 
+    
+
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 Steven Hamm</p>
     </footer>
 
 <script src="scripts.js" defer></script>
-
+<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
 </body>
 </html>

@@ -65,5 +65,23 @@ function validateForm(event) {
     }
 }
 
-// Attach the validateForm function to form submit
+// validateForm function to form submit
 form.addEventListener('submit', validateForm);
+
+fetch('https://api.github.com/users/${RadHamm}/repos')
+    .then(response => response.json())
+    .then(data => {
+    
+        const projectUploadDate = data.uploadDate;
+        
+        // parse variables
+        const uploadDate = moment(projectUploadDate);
+        const currentDate = moment();
+        
+        // Display the upload date and time difference
+        document.getElementById('upload-date').textContent = uploadDate.format('MM DD YYYY');
+        document.getElementById('time-since-update').textContent = uploadDate.fromNow();
+    })
+    .catch(error => {
+        console.error('Error fetching upload date:', error);
+    });
