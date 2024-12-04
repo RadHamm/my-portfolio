@@ -11,9 +11,12 @@ body {
 
 header {
 
-    color: white;
     padding: 20px;
     text-align: center;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 nav ul {
@@ -27,7 +30,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+
     text-decoration: none;
     font-weight: bold;
 }
@@ -39,7 +42,6 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -57,14 +59,11 @@ section {
     display: none;
     margin-top: 10px;
     font-size: 1rem;
-    color: white;
     padding: 10px;
     border-radius: 5px;
 }
 
-h2 {
-    color: white;
-}
+
 
 footer {
     background-color: #333;
@@ -148,14 +147,14 @@ body.light-mode {
 }
 
 body.light-mode header {
-    color: black;
+    color: white;
 }
 body.light-mode footer {
     color: white;
 }
 
 body.light-mode a {
-    color: black;
+    color: white;
 }
 
 body.light-mode button {
@@ -178,6 +177,10 @@ body.dark-mode {
     background-size: cover;
     background-attachment: fixed;
     color: white;
+}
+
+body.dark-mode h1, h2, h3, p {
+    color: white
 }
 
 body.dark-mode header,
@@ -211,3 +214,5 @@ body.dark-mode button:hover {
     font-size: 14px;
     cursor: pointer;
 }
+
+
