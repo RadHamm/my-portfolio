@@ -23,6 +23,7 @@
                 <li><button id="dark-mode">Dark mode</button></li>
                 </div>
             </ul>
+
         </nav>
     </header>
 
@@ -32,35 +33,33 @@
         <p> Hello, my name is Steven Hamm.
         <p> I'm an avid gamer with a passion for coding and learning about the technological systems.
         <p> I enjoy watching anime and binge watching popular series on netflix and the like, my journey is just beginning.
-        </p>
+            <div class="text" id="slogan">
+                code <span class="typeWriter">
+                <span class="wrap"></span>
+                </span><span class="cursor">|</span>
+            </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
         <h2>My Projects</h2>
         
-        <div class="container" id="project-container">
+        <div class="container" id="projects-container">
             <div class="project">
-                <h3 class="project-title">Project One</h3>
-                <p class="project-description">A brief description of the first project.</p>
+                <h3 class="project-title">My GitHub Projects</h3>
+                <p class="project-description">Press 'Show Details' for links to my GitHub Projects</p>
                 <button onclick="toggleDetails('details1')">Show Details</button>
                 <div class="details" id="details1">
-                    <p>More information about Project One</p>
-                    <p>Upload Date: <span id="upload-date"></span></p>
-                    <p>Time Since Last Update: <span id="time-since-update"></span></p>
                 </div>
-
-                <div class="project">
-                    <h3 class="project-title">Project Two</h3>
-                    <p class="project-description-two">A brief description of the second project.</p>
-                    <button onclick="toggleDetails('details2')">Show Details</button>
-                    <div class="details" id="details2">
-                        <p>More information about Project Two.</p>
-                        <p>Upload Date: <span id="upload-date"></span></p>
-                        <p>Time Since Last Update: <span id="time-since-update"></span></p>
-                    </div>
+            </div>
 
         </div>
+        <div class="container" id="projects-container">
+        <div class="project" data-category="javascript">Projects: JavaScript</div>
+        <button class="filter-btn" data-category="javascript">JavaScript</button>
+
+        <div class="project" data-category="html-css">Projects: HTML/CSS</div>
+        <button class="filter-btn" data-category="html-css">HTML/CSS</button>
 
     </section>
 

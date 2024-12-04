@@ -1,9 +1,16 @@
+const githubUsername = 'RadHamm';
+const apiUrl = 'https://api.github.com/users/RadHamm/repos';
+
+
 function toggleDetails(detailsId) {
     const detailsElement = document.getElementById(detailsId); // gets element from ID
     const isVisible = detailsElement.style.display === 'block'; // checks if element is visible
-    detailsElement.style.display = isVisible ? 'none' : 'block'; // toggle between hidden or not
-    const githubUsername = 'RadHamm';
-    const projectContainer = document.getElementById('project-container');
+
+    if (!isVisible) {
+        fetchRepos();
+    }
+    projectsContainer.style.display = isVisible ? 'none' : 'block'; // toggle between hidden or not
+
 }
 
 // Get form elements
@@ -70,93 +77,42 @@ function validateForm(event) {
 // validateForm function to form submit
 form.addEventListener('submit', validateForm);
 
-// GitHub Integration attempt
-fetch('https://api.github.com/users/RadHamm/repos')
-    .then(response => response.json())
-    .then(data => {
+// fetch function for github api
+async function fetchRepos() {
 
-        // Loop each repo
-        data.forEach(repo => {
-            const projectDiv = document.createElement('div');
-            projectDiv.classList.add('project');
+    try {
+        const response = await fetch(apiUrl);
 
-            const projectTitle = document.createElement('h3');
-            projectTitle.classList.add('project-title');
-            projectTitle.textContent = repo.name;
+// error checking fetch data from github api
+if (!response.ok) {
+    console.error('error fetch data', response.status);
+    return;
+}
+        //json parse to extra api data
+        const repos = await response.json();
+        // container getter for project details
+        const projectsContainer = document.getElementById('projects-container');
 
-        // Create project description
-        const projectDescription = document.createElement('p');
-        projectDescription.classList.add('project-description');
-        projectDescription.textContent = repo.description || 'No description available';
+        projectsContainer.innerHTML = '';
 
-        // Create a button to show project details
-        const showDetailsButton = document.createElement('button');
-        showDetailsButton.textContent = 'Show Details';
-        showDetailsButton.onclick = () => toggleDetails(repo.name);
+// Loop through each repo and display its HTML URL
+        // Loop through each repo and display its HTML URL
+        repos.forEach(repo => {
+            const repoLink = document.createElement('a');
+            repoLink.href = repo.html_url;  // Set the href to the repository URL
+            repoLink.classList.add('project-link');
+            repoLink.textContent = repo.name;  // Set the link text to the repository name
+            
+            // Append the link to the projects container
+            projectsContainer.appendChild(repoLink);
+        });
 
-        // Create details div (hidden initially)
-        const detailsDiv = document.createElement('div');
-        detailsDiv.classList.add('details');
-        detailsDiv.id = repo.name;
-        detailsDiv.style.display = 'none';
 
-        // Add details to the details section
-        const detailsText = document.createElement('p');
-        detailsText.textContent = `More information about ${repo.name}`;
-
-        // Add repository info
-        const uploadDate = document.createElement('p');
-        const updateDate = new Date(repo.updated_at);
-        uploadDate.textContent = `Upload Date: ${updateDate.toLocaleDateString()}`;
-
-        const timeSinceUpdate = document.createElement('p');
-        timeSinceUpdate.textContent = `Time Since Last Update: ${moment(updateDate).fromNow()}`;
-
-        detailsDiv.append(detailsText, uploadDate, timeSinceUpdate);
-
-        // If the repository has a homepage (live page), add a link
-        if (repo.homepage) {
-            const liveLink = document.createElement('a');
-            liveLink.href = repo.homepage;
-            liveLink.target = '_blank';
-            liveLink.textContent = 'View Live Page';
-            detailsDiv.appendChild(liveLink);
-        }
-
-        // Append elements to the project div
-        projectDiv.append(projectTitle, projectDescription, showDetailsButton, detailsDiv);
-
-        // Append project div to the container
-        projectContainer.appendChild(projectDiv);
-    }   );
-})
-        .catch(error => {
-        console.error('Error fetching GitHub repositories:', error);
-        projectContainer.innerHTML = '<p>There was an issue loading your projects. Please try again later.</p>';
-    });
-
-        // Toggle project details visibility
-        function toggleDetails(projectName) {
-        const detailsElement = document.getElementById(projectName);
-        const isVisible = detailsElement.style.display === 'block';
-        detailsElement.style.display = isVisible ? 'none' : 'block';
+    } catch (error) {
+        console.error('Error fetching repos:', error);
+    }
 }
 
-        /*}) old code
-    
-        const projectUploadDate = data.uploadDate;
-        
-        // parse variables
-        const uploadDate = moment(projectUploadDate);
-        const currentDate = moment();
-        
-        // Display the upload date and time difference
-        document.getElementById('upload-date').textContent = uploadDate.format('MM DD YYYY');
-        document.getElementById('time-since-update').textContent = uploadDate.fromNow();
-    })
-    .catch(error => {
-        console.error('Error fetching upload date:', error);
-    }); */
 
    // Toggle light mode
 // Get the buttons for toggling light and dark modes
@@ -179,7 +135,7 @@ function enableDarkMode() {
 lightModeButton.addEventListener('click', enableLightMode);
 darkModeButton.addEventListener('click', enableDarkMode);
 
-// Optional: Persist the mode across sessions using localStorage
+// keep the mode across sessions using localStorage
 window.addEventListener('load', () => {
     if (localStorage.getItem('mode') === 'dark') {
         enableDarkMode();
@@ -196,3 +152,58 @@ lightModeButton.addEventListener('click', () => {
 darkModeButton.addEventListener('click', () => {
     localStorage.setItem('mode', 'dark');
 });
+
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projects = document.querySelectorAll('.project');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        projects.forEach(project => {
+            if (project.getAttribute('data-category') === category || category === 'all') {
+                project.style.display = 'block';
+            } else {
+                project.style.display = 'none';
+            }
+        });
+    });
+});
+
+// typewriter attempt
+document.addEventListener('DOMContentLoaded', function() {
+    const typeWriter = document.querySelector('.typeWriter .wrap'); // The span that will hold the typed text
+    const cursor = document.querySelector('.cursor'); // The blinking cursor element
+    const quotes = ["aesthetically", "cleanly", "with the future in mind"]; // Array of quotes to rotate
+    let quoteIndex = 0; // Index for the current quote
+    const typingSpeed = 150; // Speed of typing each character (in milliseconds)
+    const delayAfterTyping = 1000; // Time to wait after the quote is fully typed before starting the next one
+
+    // Function to type out a quote
+    function typeQuote() {
+        const currentQuote = quotes[quoteIndex]; // Get the current quote to type
+        let charIndex = 0;
+        typeWriter.textContent = ""; // Clear current text
+
+        // Typing effect for each character of the current quote
+        const typingInterval = setInterval(function() {
+            typeWriter.textContent += currentQuote[charIndex]; // Add one character at a time
+            charIndex++;
+
+            // Once the entire quote is typed, stop the typing interval and start the next quote after a delay
+            if (charIndex === currentQuote.length) {
+                clearInterval(typingInterval);
+                setTimeout(nextQuote, delayAfterTyping); // Wait and then move to the next quote
+            }
+        }, typingSpeed);
+    }
+
+    // Function to go to the next quote
+    function nextQuote() {
+        quoteIndex = (quoteIndex + 1) % quotes.length; // Loop to the next quote or start over
+        typeQuote(); // Start typing the next quote
+    }
+
+    // Start typing the first quote
+    typeQuote();
+});
+
