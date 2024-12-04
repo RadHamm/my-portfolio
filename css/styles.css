@@ -3,17 +3,20 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../media/Waterfall.jpg') !important;
     background-size: cover;
     background-attachment: fixed;
     line-height: 1.6;
+    transition: background 0.5s ease, color 0.5 ease;
 }
 
 header {
 
-    color: white;
     padding: 20px;
     text-align: center;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 nav ul {
@@ -27,7 +30,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+
     text-decoration: none;
     font-weight: bold;
 }
@@ -39,7 +42,6 @@ nav ul li a:hover {
 section {
     padding: 20px;
     margin: 20px;
-    color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -57,14 +59,11 @@ section {
     display: none;
     margin-top: 10px;
     font-size: 1rem;
-    color: white;
     padding: 10px;
     border-radius: 5px;
 }
 
-h2 {
-    color: white;
-}
+
 
 footer {
     background-color: #333;
@@ -87,12 +86,27 @@ form {
     color: red;
 }
 
+.project:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
 button {
     padding: 5px 10px;
 }
 
+button:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
 /* Media Queries for Mobile Devices */
 @media only screen and (max-width: 600px) {
+
+    body {
+        font-size: 9px;
+    }
+
     header, footer {
         padding: 10px;
     }
@@ -108,3 +122,97 @@ button {
         margin: 10px;  
     }
 }
+
+@media only screen and (min-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+
+    header, footer {
+        padding: 20px;
+    }
+    nav ul li {
+        display: inline-block;
+        padding: 20px;
+        margin: 20px;
+    }
+}
+
+/* Light mode styles */
+body.light-mode {
+    background-image: url('../media/Trees.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    color: black;
+}
+
+body.light-mode header {
+    color: white;
+}
+body.light-mode footer {
+    color: white;
+}
+
+body.light-mode a {
+    color: white;
+}
+
+body.light-mode button {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}
+
+body.light-mode button:hover {
+    background-color: black;
+}
+
+body.light-mode section {
+    color: white
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-image: url('../media/Waterfall.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+}
+
+body.dark-mode h1, h2, h3, p {
+    color: white
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+    color: white;
+}
+
+body.dark-mode a {
+    color: #fff;
+}
+
+body.dark-mode button {
+    background-color: white;
+    color: black;
+    border: 1px solid #444;
+}
+
+body.dark-mode button:hover {
+    background-color: white;
+}
+
+.mode-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.mode-switcher button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
