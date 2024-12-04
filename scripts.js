@@ -168,3 +168,42 @@ filterButtons.forEach(button => {
         });
     });
 });
+
+// typewriter attempt
+document.addEventListener('DOMContentLoaded', function() {
+    const typeWriter = document.querySelector('.typeWriter .wrap'); // The span that will hold the typed text
+    const cursor = document.querySelector('.cursor'); // The blinking cursor element
+    const quotes = ["aesthetically", "cleanly", "with the future in mind"]; // Array of quotes to rotate
+    let quoteIndex = 0; // Index for the current quote
+    const typingSpeed = 150; // Speed of typing each character (in milliseconds)
+    const delayAfterTyping = 1000; // Time to wait after the quote is fully typed before starting the next one
+
+    // Function to type out a quote
+    function typeQuote() {
+        const currentQuote = quotes[quoteIndex]; // Get the current quote to type
+        let charIndex = 0;
+        typeWriter.textContent = ""; // Clear current text
+
+        // Typing effect for each character of the current quote
+        const typingInterval = setInterval(function() {
+            typeWriter.textContent += currentQuote[charIndex]; // Add one character at a time
+            charIndex++;
+
+            // Once the entire quote is typed, stop the typing interval and start the next quote after a delay
+            if (charIndex === currentQuote.length) {
+                clearInterval(typingInterval);
+                setTimeout(nextQuote, delayAfterTyping); // Wait and then move to the next quote
+            }
+        }, typingSpeed);
+    }
+
+    // Function to go to the next quote
+    function nextQuote() {
+        quoteIndex = (quoteIndex + 1) % quotes.length; // Loop to the next quote or start over
+        typeQuote(); // Start typing the next quote
+    }
+
+    // Start typing the first quote
+    typeQuote();
+});
+
