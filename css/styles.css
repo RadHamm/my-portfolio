@@ -215,4 +215,10 @@ body.dark-mode button:hover {
     cursor: pointer;
 }
 
+#slogan {
+    -webkit-animation: fadeIn .75s ease-out .75s 1, fromBottom .75s ease-out .75s 1;
+    animation: fadeIn .75s ease-out .75s 1, fromBottom .75s ease-out .75s 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
 

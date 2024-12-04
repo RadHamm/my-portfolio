@@ -135,7 +135,7 @@ function enableDarkMode() {
 lightModeButton.addEventListener('click', enableLightMode);
 darkModeButton.addEventListener('click', enableDarkMode);
 
-// Optional: Persist the mode across sessions using localStorage
+// keep the mode across sessions using localStorage
 window.addEventListener('load', () => {
     if (localStorage.getItem('mode') === 'dark') {
         enableDarkMode();
@@ -151,4 +151,20 @@ lightModeButton.addEventListener('click', () => {
 
 darkModeButton.addEventListener('click', () => {
     localStorage.setItem('mode', 'dark');
+});
+
+const filterButtons = document.querySelectorAll('.filter-btn');
+const projects = document.querySelectorAll('.project');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        projects.forEach(project => {
+            if (project.getAttribute('data-category') === category || category === 'all') {
+                project.style.display = 'block';
+            } else {
+                project.style.display = 'none';
+            }
+        });
+    });
 });
