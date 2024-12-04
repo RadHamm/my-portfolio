@@ -82,13 +82,15 @@ async function fetchRepos() {
 
     try {
         const response = await fetch(apiUrl);
-        const repos = await response.json();
 
+// error checking fetch data from github api
 if (!response.ok) {
     console.error('error fetch data', response.status);
     return;
 }
-
+        //json parse to extra api data
+        const repos = await response.json();
+        // container getter for project details
         const projectsContainer = document.getElementById('projects-container');
 
         projectsContainer.innerHTML = '';
