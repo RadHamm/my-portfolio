@@ -85,3 +85,42 @@ fetch('https://api.github.com/users/${RadHamm}/repos')
     .catch(error => {
         console.error('Error fetching upload date:', error);
     });
+
+   // Toggle light mode
+// Get the buttons for toggling light and dark modes
+const lightModeButton = document.getElementById('light-mode');
+const darkModeButton = document.getElementById('dark-mode');
+
+// Function to activate light mode
+function enableLightMode() {
+    document.body.classList.add('light-mode');
+    document.body.classList.remove('dark-mode');
+}
+
+// Function to activate dark mode
+function enableDarkMode() {
+    document.body.classList.add('dark-mode');
+    document.body.classList.remove('light-mode');
+}
+
+// Add event listeners to the buttons
+lightModeButton.addEventListener('click', enableLightMode);
+darkModeButton.addEventListener('click', enableDarkMode);
+
+// Optional: Persist the mode across sessions using localStorage
+window.addEventListener('load', () => {
+    if (localStorage.getItem('mode') === 'dark') {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
+});
+
+// Store the mode in localStorage
+lightModeButton.addEventListener('click', () => {
+    localStorage.setItem('mode', 'light');
+});
+
+darkModeButton.addEventListener('click', () => {
+    localStorage.setItem('mode', 'dark');
+});
