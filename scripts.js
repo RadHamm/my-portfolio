@@ -5,7 +5,12 @@ const apiUrl = 'https://api.github.com/users/RadHamm/repos';
 function toggleDetails(detailsId) {
     const detailsElement = document.getElementById(detailsId); // gets element from ID
     const isVisible = detailsElement.style.display === 'block'; // checks if element is visible
-    detailsElement.style.display = isVisible ? 'none' : 'block'; // toggle between hidden or not
+
+    if (!isVisible) {
+        fetchRepos();
+    }
+    projectsContainer.style.display = isVisible ? 'none' : 'block'; // toggle between hidden or not
+
 }
 
 // Get form elements
@@ -72,7 +77,7 @@ function validateForm(event) {
 // validateForm function to form submit
 form.addEventListener('submit', validateForm);
 
-
+// fetch function for github api
 async function fetchRepos() {
 
     try {
@@ -85,6 +90,8 @@ if (!response.ok) {
 }
 
         const projectsContainer = document.getElementById('projects-container');
+
+        projectsContainer.innerHTML = '';
 
 // Loop through each repo and display its HTML URL
         // Loop through each repo and display its HTML URL
@@ -103,9 +110,6 @@ if (!response.ok) {
         console.error('Error fetching repos:', error);
     }
 }
-
-// Fetch repositories when the page loads
-window.onload = fetchRepos;
 
 
    // Toggle light mode
