@@ -19,6 +19,17 @@ body {
     transition: background 0.5s ease, color 0.5 ease;
 }
 
+.scaled-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .text {
     animation: fadeIn is ease-in-out;
 }
@@ -101,8 +112,9 @@ form {
 }
 
 .project:hover {
-    transform: scale(1.05);
+    transform: scale(1.20);
     transition: transform 0.3s ease;
+    background-size:contain;
 }
 
 button {
@@ -158,6 +170,11 @@ body.light-mode {
     background-size: cover;
     background-attachment: fixed;
     color: black;
+}
+
+body.light-mode .project:hover {
+    background-color: rgba(0, 0, 0, 0.3)
+
 }
 
 body.light-mode header {
@@ -238,6 +255,8 @@ body.dark-mode button:hover {
     height: 35px;
 }
 
+
+
 #slogan {
 
     font-size: 20px;
@@ -275,3 +294,32 @@ body.dark-mode button:hover {
         transform: translateY(0%);
     }
 }
+
+    /* Style extra information */
+    .extra-info {
+        display: none;
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    /* Show extra info */
+    .hover-info:hover .extra-info {
+        display: block;
+    }
+
+    /* Style button */
+    .info-button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .info-button:hover {
+        background-color: #45a049;
+    }

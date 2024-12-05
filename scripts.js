@@ -98,13 +98,25 @@ if (!response.ok) {
 // Loop through each repo and display its HTML URL
         // Loop through each repo and display its HTML URL
         repos.forEach(repo => {
+            const projectElement = document.createElement('div');
+            projectElement.classList.add('project');
+
             const repoLink = document.createElement('a');
             repoLink.href = repo.html_url;  // Set the href to the repository URL
             repoLink.classList.add('project-link');
             repoLink.textContent = repo.name;  // Set the link text to the repository name
+            projectElement.appendChild(repoLink)
+
+            const repoDescription = document.createElement('p');
+            repoDescription.textContent = repo.description; // Display project description
+            projectElement.appendChild(repoDescription);
+            
+            const repoTech = document.createElement('p');
+            repoTech.textContent = `Technologies: ${repo.language || 'Not Specified'}`; // Show technology stack
+            projectElement.appendChild(repoTech);
             
             // Append the link to the projects container
-            projectsContainer.appendChild(repoLink);
+            projectsContainer.appendChild(projectElement);
         });
 
 
@@ -206,4 +218,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start typing the first quote
     typeQuote();
 });
-
