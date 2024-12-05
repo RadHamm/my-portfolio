@@ -218,4 +218,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start typing the first quote
     typeQuote();
 });
-
