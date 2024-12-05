@@ -229,6 +229,15 @@ body.dark-mode button:hover {
     cursor: pointer;
 }
 
+.filter-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 14px;
+    width: 120px;
+    height: 35px;
+}
+
 #slogan {
 
     font-size: 20px;
