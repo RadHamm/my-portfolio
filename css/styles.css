@@ -167,6 +167,34 @@ button:hover {
     }
 }
 
+@media (max-width: 768px) {
+    .scaled-img {
+        max-width: 200px;
+        width: 65%;
+        margin-top: 20px;
+    }
+    .mode-switcher {
+        max-width: 200px;
+        width: 65%;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scaled-img {
+        max-width: 100px;
+        width: 45%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .mode-switcher {
+        max-width: 100px;
+        width: 45%;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+}
+
 /* Light mode styles */
 body.light-mode {
     background-image: url('../media/Trees.jpg');
